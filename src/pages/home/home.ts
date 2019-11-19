@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NoteService } from '../../app/note.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 
@@ -15,8 +16,13 @@ export class HomePage {
   notes;
   //injeção de dependência
   //é um tipo de inversão de controle
-  constructor(public navCtrl: NavController, public noteService: NoteService) {
-    this.notes = this.noteService.notes;
+  constructor(public navCtrl: NavController,
+               public noteService: NoteService) {
+    //this.notes = this.noteService.notes;
+  }
+
+  ngOnInit (){
+    this.notes = this.noteService.fetchNotes()
   }
 
   onCardClick (note){

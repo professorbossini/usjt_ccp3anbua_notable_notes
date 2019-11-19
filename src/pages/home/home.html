@@ -8,7 +8,7 @@
 
 <ion-content padding>
   
-  <ion-card *ngFor="let note of notes" (click)="onCardClick(note)">
+  <ion-card *ngFor="let note of notes | async" (click)="onCardClick(note)">
     <ion-card-header>
       {{note.date | date: 'dd/MM/yyyy'}}
     </ion-card-header>

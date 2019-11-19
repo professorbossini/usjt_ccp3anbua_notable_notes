@@ -18,6 +18,7 @@ export class DetailPage {
 
   note;
   newNoteFlag = false;
+  deleteNoteFlag = false;
   constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -43,6 +44,9 @@ export class DetailPage {
   ionViewWillLeave (){
     if (this.newNoteFlag)
       this.noteService.addNote(this.note);
+    else if (!this.deleteNoteFlag){
+      this.noteService.editNote(this.note);
+    }
   }
 
   onTrash (){
@@ -56,6 +60,7 @@ export class DetailPage {
         {
           text: "OK",
           handler: () => {
+            this.deleteNoteFlag = true;
             this.noteService.removeNote(this.note)
             this.navCtrl.pop();
           }
